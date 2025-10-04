@@ -1,0 +1,55 @@
+services:
+  open-webui:
+    env_file: .env
+    # image: ghcr.io/open-webui/open-webui:main
+    image: ghcr.io/open-webui/open-webui:0.6.22
+    container_name: mcp-openwebui-demo-open-webui
+    ports:
+      - "3000:8080"
+    environment:
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+    volumes:
+      - open-webui-data:/app/backend/data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+
+  mcp-server:
+    env_file: .env
+    image: call518/mcp-server-demo:1.0.0
+    container_name: mmcp-openwebui-demo-mcp-server
+    ports:
+      - "${DOCKER_EXTERNAL_PORT_MCP_SERVER}:8000" ### (WARNING) Must be same with port number of 'FASTMCP_PORT', 'mcp-config.json' and 'mcp-config.json.http'
+    volumes:
+      - ./src:/app/src/
+      - ./scripts:/app/scripts
+      - ./.env:/app/.env:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z localhost 8000 && sleep 5"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+
+  mcpo-proxy:
+    env_file: .env
+    image: call518/mcpo-proxy-demo:1.0.0
+    container_name: mcp-openwebui-demo-mcpo-proxy
+    depends_on:
+      mcp-server:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./mcp-config.json.http:/app/config/mcp-config.json
+      - ./src:/app/src
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+
+volumes:
+  open-webui-data:
+    name: open-webui-data-mcp-openwebui-demo
