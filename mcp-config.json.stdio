@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "mcp-openwebui-demo": {
+      "command": "python",
+      "args": ["-m", "mcp_openwebui_demo"],
+      "env": {
+        "PYTHONPATH": "/app/src",
+        "REMOTE_AUTH_ENABLE": "false",
+        "MCP_LOG_LEVEL": "INFO"
+      }
+    }
+  }
+}

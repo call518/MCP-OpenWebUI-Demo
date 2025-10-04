@@ -15,7 +15,6 @@ except ImportError:
     except ImportError:
         # Fallback for development - will be available at runtime
         StaticTokenVerifier = None
-from .functions import fetch_external_data, format_data
 
 # TODO: 필요한 라이브러리들을 여기에 추가하세요
 # 예시:
