@@ -85,7 +85,8 @@ def get_sum(a: int, b: int) -> int:
 #==============================================================================
 
 # Add a dynamic greeing resource
-@mcp.resource("greeting://{name}")
+# @mcp.resource("greeting://{name}")
+@mcp.resource("resource://greeting/{name}")
 def get_greeting(name: str) -> str:
     """Get a personalized greeting"""
     return f"Hello, {name}!"
