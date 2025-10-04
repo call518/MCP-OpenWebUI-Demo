@@ -56,16 +56,16 @@ if _auth_enable and _secret_key and StaticTokenVerifier:
     
     auth = StaticTokenVerifier(tokens=tokens)
     # TODO: "your-server-name"을 실제 서버 이름으로 변경하세요
-    mcp = FastMCP("your-server-name", auth=auth)
+    mcp = FastMCP("mcp-openwebui-demo", auth=auth)
     logger.info("MCP instance initialized with authentication")
 elif _auth_enable and _secret_key and not StaticTokenVerifier:
     logger.warning("Authentication requested but StaticTokenVerifier not available - running without authentication")
     # TODO: "your-server-name"을 실제 서버 이름으로 변경하세요
-    mcp = FastMCP("your-server-name")
+    mcp = FastMCP("mcp-openwebui-demo")
 else:
     logger.info("Initializing MCP instance without authentication")
     # TODO: "your-server-name"을 실제 서버 이름으로 변경하세요
-    mcp = FastMCP("your-server-name")
+    mcp = FastMCP("mcp-openwebui-demo")
 
 #==============================================================================
 # MCP Tools
