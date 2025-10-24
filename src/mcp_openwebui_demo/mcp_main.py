@@ -5,16 +5,12 @@ import sys
 from typing import Any, Optional
 from fastmcp import FastMCP
 
-# Authentication import - will be resolved at runtime
-# TODO: Verify correct import path for StaticTokenVerifier in your fastmcp version
+# Authentication import - resolved for fastmcp v2.12.4+
 try:
-    from fastmcp.auth import StaticTokenVerifier
+    from fastmcp.server.auth import StaticTokenVerifier
 except ImportError:
-    try:
-        from mcp.server.auth import StaticTokenVerifier
-    except ImportError:
-        # Fallback for development - will be available at runtime
-        StaticTokenVerifier = None
+    # Fallback for older versions or if module not available
+    StaticTokenVerifier = None
 
 # TODO: 필요한 라이브러리들을 여기에 추가하세요
 # 예시:
