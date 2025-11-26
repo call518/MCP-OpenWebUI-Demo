@@ -75,6 +75,22 @@ python -m src.mcp_openwebui_demo.mcp_main --log-level DEBUG
 # }
 ```
 
+## OpenWebUI Access
+
+Start OpenWebUI with Docker Compose:
+
+```bash
+docker compose up -d
+```
+
+Access the web interface at: **http://localhost:4000**
+
+To stop the services:
+
+```bash
+docker compose down
+```
+
 ## Server Configuration
 
 ### Command Line Options
