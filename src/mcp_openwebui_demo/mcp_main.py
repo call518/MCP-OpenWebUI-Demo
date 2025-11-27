@@ -76,6 +76,15 @@ def get_sum(a: int, b: int) -> int:
     """
     return a + b
 
+@mcp.tool()
+def get_difference(a: int, b: int) -> int:
+    """
+    This tool performs subtraction of two integers.
+    It takes two numbers as input and returns the difference (a - b),
+    enabling subtraction operations within workflows.
+    """
+    return a - b
+
 #==============================================================================
 # MCP Resources
 #==============================================================================

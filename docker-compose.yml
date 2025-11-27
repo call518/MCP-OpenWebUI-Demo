@@ -12,7 +12,7 @@ services:
       - open-webui-data:/app/backend/data
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    restart: unless-stopped
+    #restart: unless-stopped
 
   mcp-server:
     env_file: .env
@@ -26,13 +26,13 @@ services:
       - ./.env:/app/.env:ro
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "nc -z localhost 8000 && sleep 5"]
       interval: 5s
       timeout: 10s
       retries: 5
       start_period: 10s
+    #restart: unless-stopped
 
   mcpo-proxy:
     env_file: .env
@@ -48,7 +48,7 @@ services:
       - ./src:/app/src
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    restart: unless-stopped
+    #restart: unless-stopped
 
 volumes:
   open-webui-data:
